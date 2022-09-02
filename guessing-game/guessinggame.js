@@ -1,4 +1,4 @@
-var number = Math.floor(Math.random() * 101);
+var randomnumber = Math.floor(Math.random() * 101);
 var knapp = document.querySelector("#knappID");
 var input = document.querySelector("#inputID");
 function sjekkTall(){
