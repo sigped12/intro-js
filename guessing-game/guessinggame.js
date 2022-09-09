@@ -1,4 +1,6 @@
 var attempts = 5;
+var seconds = 60;
+var playing = false;
 var randomnumber = Math.floor(Math.random() * 101);
 console.log("randomnumber: " + randomnumber);
 var button = document.querySelector("#buttonID");
@@ -9,15 +11,30 @@ function checkNumber(){
 
     if (input.value == randomnumber) {
         console.log("correct");
-        document.getElementById("output").innerHTML="You guessed correct with " + attempts + " attempts left.";
+        if (attempts > 1) {
+            document.getElementById("output").innerHTML="You guessed correct with " + attempts + " attempts left.";
+        }
+        else {
+            document.getElementById("output").innerHTML="You guessed correct with " + attempts + " attempt left.";
+        }
     } else if (input.value < randomnumber) {
         attempts--;
         console.log("too low");
-        document.getElementById("output").innerHTML="Too low. " + attempts + " attempts left";
+        if (attempts > 1) {
+            document.getElementById("output").innerHTML="Too low. " + attempts + " attempts left";
+        }
+        else {
+            document.getElementById("output").innerHTML="Too low. " + attempts + " attempt left";
+        }
     } else {
         attempts--;
         console.log("too high");
-        document.getElementById("output").innerHTML="Too high. " + attempts + " attempts left";
+        if (attempts > 1) {
+            document.getElementById("output").innerHTML="Too high. " + attempts + " attempts left";
+        }
+        else {
+            document.getElementById("output").innerHTML="Too high. " + attempts + " attempt left";
+        }
     }
 
     if (attempts <= 0) {
@@ -27,8 +44,21 @@ function checkNumber(){
 
 }
 
-//function timer(){}
+// når knapp trykkes
 
+a = setInterval(countdown, 1000);  
+document.getElementById("countdown").innerHTML=seconds;
+
+// kjører 1 gang i sekundet
+function countdown(){
+    seconds--;
+    console.log(seconds)
+    document.getElementById("countdown").innerHTML=seconds;
+    if (seconds <= 0) {
+        seconds = 60;
+        document.getElementById("countdown").innerHTML="You are out of time";
+    }
+    
+}
 
 button.addEventListener("click", checkNumber);
-//button.addEventListener("click", function(){setTimeout(myFunc, 60000)});
