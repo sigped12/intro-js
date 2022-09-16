@@ -1,5 +1,5 @@
 var attemptsSet = 5;
-var secondsSet = 10;
+var secondsSet = 60;
 
 var attempts = attemptsSet;
 var attemptsUp = false;
@@ -8,9 +8,9 @@ var playing = true;
 var randomnumber = Math.floor(Math.random() * 101);
 console.log("randomnumber: " + randomnumber);
 
-var guessBt = document.querySelector("#guessID");
-var restartBt = document.querySelector("restartID");
-var input = document.querySelector("#inputID");
+var guessBt = document.querySelector("#guess");
+var restartBt = document.querySelector("#restart");
+var input = document.querySelector("#input");
 var output = document.querySelector("#output");
 var countdownEl = document.querySelector("#countdown");
 
@@ -21,10 +21,10 @@ function checkNumber(){
 
         if (input.value == randomnumber) {
             console.log("correct");
+            attemptsUp = true;
             if (attempts > 1) {
                 output.innerHTML="You guessed correct with " + attempts + " attempts left.";
-            }
-            else {
+            } else {
                 output.innerHTML="You guessed correct with " + attempts + " attempt left.";
             }
         } else if (input.value < randomnumber) {
@@ -32,8 +32,7 @@ function checkNumber(){
             console.log("too low");
             if (attempts > 1) {
                 output.innerHTML="Too low. " + attempts + " attempts left";
-            }
-            else {
+            } else {
                 output.innerHTML="Too low. " + attempts + " attempt left";
             }
         } else {
@@ -41,8 +40,7 @@ function checkNumber(){
             console.log("too high");
             if (attempts > 1) {
                 output.innerHTML="Too high. " + attempts + " attempts left";
-            }
-            else {
+            } else {
                 output.innerHTML="Too high. " + attempts + " attempt left";
             }
         }
@@ -50,33 +48,33 @@ function checkNumber(){
         if (attempts <= 0) {
             playing = false;
             attemptsUp = true;
+            console.log("attemptsUp: ", attemptsUp);
             console.log("no attempts left");
             output.innerHTML="No attempts left. The number was " + randomnumber;
         }
     } else {
         if (seconds <= 0) {
-            output.InnerHTML="You are out of time. The number was " + randomnumber;
+            output.innerHTML="You are out of time. The number was " + randomnumber;
         } else if (attempts <= 0) {
-            output.InnerHTML="No attempts left. The number was " + randomnumber;
+            output.innerHTML="No attempts left. The number was " + randomnumber;
         } else {
-            output.InnerHTML="error";
+            output.innerHTML="error";
         }
         
     }
     
-
 }
 
 
 function restartGame(){
-    if (playing = false) {
-        attempts = attemptsSet;
-        attemptsUp = false;
-        seconds = secondsSet;
-        playing = true;
-        randomnumber = Math.floor(Math.random() * 101);
-        console.log("randomnumber: " + randomnumber);
-    }
+    console.log("game restarted");
+    output.innerHTML="Game restarted. Guess a number";
+    attempts = attemptsSet;
+    attemptsUp = false;
+    seconds = secondsSet;
+    playing = true;
+    randomnumber = Math.floor(Math.random() * 101);
+    console.log("randomnumber: " + randomnumber);
 }
 
 
@@ -94,9 +92,9 @@ function countdown(){
     if (seconds <= 0) {
         seconds = 0;
         playing = false;
-        console.log("Playing is: ", playing)
+        console.log("playing: ", playing);
         output.innerHTML="You are out of time. The number was " + randomnumber;
-        console.log("out of time")
+        console.log("out of time");
     }
     
 }
