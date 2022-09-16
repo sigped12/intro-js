@@ -1,33 +1,50 @@
-var attemptsSet = 5;
+var attemptsSet = 10;
 var secondsSet = 60;
-
+var score = 0;
 var attempts = attemptsSet;
 var attemptsUp = false;
 var seconds = secondsSet;
 var playing = true;
 var randomnumber = Math.floor(Math.random() * 101);
 console.log("randomnumber: " + randomnumber);
+var howClose = 100;
 
 var guessBt = document.querySelector("#guess");
 var restartBt = document.querySelector("#restart");
 var input = document.querySelector("#input");
 var output = document.querySelector("#output");
 var countdownEl = document.querySelector("#countdown");
+var scoreEl = document.querySelector("#score");
+scoreEl.innerHTML="Score: " + score;
+var guess = input.value
 
+// function that runs when a number is guessed
 function checkNumber(){
     if (playing == true) {
-        console.log("input: " + input.value);
+        console.log("input: " + guess);
         console.log("attempts: " + attempts);
 
-        if (input.value == randomnumber) {
+        // how close guess is to randomnumber
+    if (randomnumber > guess) {
+        howClose = randomnumber - guess;
+    } else if (guess > randomnumber) {
+        howClose = guess - randomnumber;
+    }
+    console.log("howClose: " + howClose);
+
+        if (guess == randomnumber) {
             console.log("correct");
             attemptsUp = true;
+            score = score + 100;
+            score = score + seconds * 2;
+            console.log("score: " + score);
+            scoreEl.innerHTML="Score: " + score;
             if (attempts > 1) {
                 output.innerHTML="You guessed correct with " + attempts + " attempts left.";
             } else {
                 output.innerHTML="You guessed correct with " + attempts + " attempt left.";
             }
-        } else if (input.value < randomnumber) {
+        } else if (guess < randomnumber) {
             attempts--;
             console.log("too low");
             if (attempts > 1) {
@@ -65,25 +82,26 @@ function checkNumber(){
     
 }
 
-
+// restart function
 function restartGame(){
     console.log("game restarted");
     output.innerHTML="Game restarted. Guess a number";
     attempts = attemptsSet;
     attemptsUp = false;
     seconds = secondsSet;
+    countdownEl.innerHTML=seconds;
     playing = true;
     randomnumber = Math.floor(Math.random() * 101);
     console.log("randomnumber: " + randomnumber);
 }
 
-
+// countdown interval
 if (playing = true) {
     a = setInterval(countdown, 1000);  
     countdownEl.innerHTML=seconds;
 }
 
-// kjører 1 gang i sekundet
+// countdown/timer function. repeats depending on interval
 function countdown(){
     if (seconds > 0 && attemptsUp == false) {
         seconds--;
@@ -99,6 +117,7 @@ function countdown(){
     
 }
 
+// event listeners
 guessBt.addEventListener("click", checkNumber);
 restartBt.addEventListener("click", restartGame);
 window.addEventListener("keyup", function(event) {
