@@ -18,19 +18,21 @@ var scoreEl = document.querySelector("#score");
 scoreEl.innerHTML="Score: " + score;
 var guess = input.value
 
+
 // function that runs when a number is guessed
 function checkNumber(){
     if (playing == true) {
+        guess = input.value
         console.log("input: " + guess);
         console.log("attempts: " + attempts);
 
         // how close guess is to randomnumber
-    if (randomnumber > guess) {
-        howClose = randomnumber - guess;
-    } else if (guess > randomnumber) {
-        howClose = guess - randomnumber;
-    }
-    console.log("howClose: " + howClose);
+        if (randomnumber > guess) {
+            howClose = randomnumber - guess;
+        } else if (guess > randomnumber) {
+            howClose = guess - randomnumber;
+        }
+        console.log("howClose: " + howClose);
 
         if (guess == randomnumber) {
             console.log("correct");
@@ -82,6 +84,7 @@ function checkNumber(){
     
 }
 
+
 // restart function
 function restartGame(){
     console.log("game restarted");
@@ -94,6 +97,7 @@ function restartGame(){
     randomnumber = Math.floor(Math.random() * 101);
     console.log("randomnumber: " + randomnumber);
 }
+
 
 // countdown interval
 if (playing = true) {
@@ -116,6 +120,7 @@ function countdown(){
     }
     
 }
+
 
 // event listeners
 guessBt.addEventListener("click", checkNumber);

@@ -1,39 +1,61 @@
+
 body {
 
     background-image: linear-gradient(#23a6d5, #ee7752);
-
     background-size: 200% 200%;
-
     background-position: 100%, 50%;
-
     height: 90vh;
-
     color: white;
 
 }
 
 
+/*
+body {
+
+    background-color: black;
+
+}
+*/
 
 input {
 
     margin-bottom: 10px;
-
     margin-top: -10px;
+    font-family: 'Arial';
+    color: black;
 
 }
+
 
 button {
 
     margin-bottom: 10px;
+    font-family: 'Arial';
+    color: black;
 
 }
-
 
 
 .guessBox {
 
     text-align: center;
-
     padding-top: 10%;
+
+}
+
+
+h1 {
+
+    font-family: 'Arial';
+    color: white;
+
+}
+
+
+h2 {
+
+    font-family: 'Arial';
+    color: white;
 
 }
